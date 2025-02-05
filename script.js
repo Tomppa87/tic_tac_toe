@@ -1,10 +1,10 @@
-function createBoard (boardSideGrids) {
-    let grid = new Array(boardSideGrids*boardSideGrids);
-    return {grid}
-}
+const board = (function () {
+    const grid = (a) => new Array(a*a);
+    return {grid};
+})();
 
-const three_sided_grid = createBoard(3);
+console.log(board.grid(3))
 
 function createPlayer (name) {
-    
+    return {name}
 }
