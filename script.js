@@ -69,6 +69,8 @@ function playerTurn(num1,num2) {
                 console.log(winningConditions[i][j])
                 winTest.push(flatBoard[winningConditions[i][j]])
             }
+            console.log(winTest)
+            // need to check here that all are X or O
             winTest = []
         }       
     }
