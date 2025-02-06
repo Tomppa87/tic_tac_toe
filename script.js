@@ -2,14 +2,14 @@ let main = document.querySelector(".main")
 
 let gameBoard;
 
-function createBoard(a) {   
-    var board =  Array.from(Array(a), () => {
-        return new Array(a).fill("");
+function createBoard() {   
+    const board =  Array.from(Array(3), () => {
+        return new Array(3).fill("");
     });
     gameBoard = board
     return board
     }
-console.log(createBoard(3));
+console.log(createBoard());
 
 function playerTurn(num1,num2) {
     let player1Turn;
@@ -19,9 +19,7 @@ function playerTurn(num1,num2) {
         
         return valid;
     }
-        console.log(valid)
-        
-    
+
     function checkTurn() {
         if ((count === 0)||(count % 2 == 0)) {
             player1Turn = true;
@@ -41,12 +39,40 @@ function playerTurn(num1,num2) {
             }
         } else {
             console.log("Error")
-            
+            return;            
         }
     }
     checkValid(num1,num2);
     checkTurn();
     playTurn();
+
+    function checkWin() {
+        const flatBoard = gameBoard.flat();
+        console.log(flatBoard) 
+        const winningConditions = [
+            [0, 1, 2],
+            [3, 4, 5],
+            [6, 7, 8],
+            [0, 3, 6],
+            [1, 4, 7],
+            [2, 5, 8],
+            [0, 4, 8],
+            [2, 4, 6]
+        ];
+        winTest = []
+        for (let i = 0; i<winningConditions.length;i++) {
+            console.log(winningConditions[i])
+            
+            console.log(winTest)
+            
+            for (let j = 0; j<3;j++) {
+                console.log(winningConditions[i][j])
+                winTest.push(flatBoard[winningConditions[i][j]])
+            }
+            winTest = []
+        }       
+    }
+    checkWin();
     
     
         
