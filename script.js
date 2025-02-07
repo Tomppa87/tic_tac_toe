@@ -31,10 +31,10 @@ function playerTurn(num1,num2) {
     function playTurn() {
         if (valid === true) {
             if (player1Turn) {
-                gameBoard[num1][num2] = "X";
+                gameBoard[num1][num2] = player1Token;
                 count +=1;
             }   else {
-                gameBoard[num1][num2] = "O";
+                gameBoard[num1][num2] = player2Token;
                 count +=1;
             }
         } else {
@@ -59,41 +59,37 @@ function playerTurn(num1,num2) {
             [0, 4, 8],
             [2, 4, 6]
         ];
-        winTest = []
+        winTest = [];
         for (let i = 0; i<winningConditions.length;i++) {
-            console.log(winningConditions[i])
-            
-            console.log(winTest)
-            
+            //console.log(winningConditions[i])            
+            //console.log(winTest)            
             for (let j = 0; j<3;j++) {
-                console.log(winningConditions[i][j])
-                winTest.push(flatBoard[winningConditions[i][j]])
+                //console.log(winningConditions[i][j])
+                winTest.push(flatBoard[winningConditions[i][j]]);
             }
             console.log(winTest)
-            // need to check here that all are X or O
-            winTest = []
+            if (winTest[0] === player1Token && winTest[1] === player1Token && winTest[2] === player1Token) {
+                console.log(`Winner is ${player1.name}`)
+            } else if (winTest[0] === player2Token && winTest[1] === player2Token && winTest[2] === player2Token){
+                console.log(`Winner is ${player2.name}`)
+            }            
+            else {
+                winTest = [];
+            }
         }       
     }
     checkWin();
-    
-    
-        
-     
-    
-    
-    
-        
-    
-    
     console.log(gameBoard);
 }
 let count = 0;
 
-function createPlayer (name) {
-    return {name}
+function createPlayer (name, token) {
+    return {name, token}
 }
 
-const player1 = createPlayer("Thomas");
-const player2 = createPlayer("Helena");
+const player1 = createPlayer("Thomas", "X");
+const player1Token = player1.token;
+const player2 = createPlayer("Helena", "O");
+const player2Token = player2.token;
 
 
