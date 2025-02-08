@@ -1,4 +1,7 @@
 let main = document.querySelector(".main")
+let turn_head = document.getElementById("turn_header")
+// Needs a bit of work
+// turn_head.innerHTML = player1Turn
 
 let gameBoard;
 
@@ -9,19 +12,68 @@ function createBoard() {
     gameBoard = board
     return board
     }
-
+const board = [];
 let boardDOM = document.querySelector(".board")    
 function createBoardDOM() {
-    const board = [];
+    
     for (i=0;i<9;i++) {
         const grid = document.createElement("button");
+        grid.id = i;        
         grid.classList.add("grid");
+        grid.innerHTML = ""
+        board.push("")
+        grid.addEventListener("click", (e) => {
+            console.log("hello"+e.target.id);
+            /*e.target.innerHTML = player1Token
+            board[grid.id] = player1Token;*/
+            playerTurnDom(parseInt(e.target.id))
+            
+        })
         boardDOM.appendChild(grid)
-
     }
+    return board;
 }
+createBoardDOM()
     
 console.log(createBoard());
+
+function playerTurnDom(num) {
+    let player1Turn;
+    let valid;
+    function checkValidDom() {
+        valid = (board[num] === "");
+        return valid;
+    }
+    function checkTurnDom() {
+        if ((count === 0)||(count % 2 == 0)) {
+            player1Turn = true;
+        } else {
+            player1Turn = false
+        };
+        return player1Turn;
+    }
+    function playTurnDom() {
+        if (valid === true) {
+            if (player1Turn) {
+                board[num] = player1Token;
+                document.getElementById(num).innerHTML = player1Token
+                               
+                count +=1;
+            }   else {
+                board[num] = player2Token;
+                document.getElementById(num).innerHTML = player2Token
+                count +=1;
+            }
+        } else {
+            console.log("Error")
+            return;            
+        }
+    }
+    checkValidDom();
+    checkTurnDom();
+    playTurnDom();
+    
+}
 
 function playerTurn(num1,num2) {
     let player1Turn;
