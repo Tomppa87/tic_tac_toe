@@ -27,6 +27,7 @@ function createBoardDOM() {
             /*e.target.innerHTML = player1Token
             board[grid.id] = player1Token;*/
             playerTurnDom(parseInt(e.target.id))
+            checkWinDom();
             
         })
         boardDOM.appendChild(grid)
@@ -74,6 +75,41 @@ function playerTurnDom(num) {
     playTurnDom();
     
 }
+function checkWinDom() {
+    const flatBoard = board;
+    console.log(flatBoard) 
+    const winningConditions = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6]
+    ];
+    winTest = [];
+    for (let i = 0; i<winningConditions.length;i++) {
+        //console.log(winningConditions[i])            
+        //console.log(winTest)            
+        for (let j = 0; j<3;j++) {
+            //console.log(winningConditions[i][j])
+            winTest.push(flatBoard[winningConditions[i][j]]);
+        }
+        console.log(winTest)
+        if (winTest[0] === player1Token && winTest[1] === player1Token && winTest[2] === player1Token) {
+            console.log(`Winner is ${player1.name}`)
+        } else if (winTest[0] === player2Token && winTest[1] === player2Token && winTest[2] === player2Token){
+            console.log(`Winner is ${player2.name}`)
+        }            
+        else {
+            winTest = [];
+        }
+    }       
+}
+/*
+checkWin();
+console.log(gameBoard);
 
 function playerTurn(num1,num2) {
     let player1Turn;
@@ -144,7 +180,7 @@ function playerTurn(num1,num2) {
     }
     checkWin();
     console.log(gameBoard);
-}
+}*/
 let count = 0;
 
 function createPlayer (name, token) {
