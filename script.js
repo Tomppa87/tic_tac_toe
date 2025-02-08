@@ -9,6 +9,18 @@ function createBoard() {
     gameBoard = board
     return board
     }
+
+let boardDOM = document.querySelector(".board")    
+function createBoardDOM() {
+    const board = [];
+    for (i=0;i<9;i++) {
+        const grid = document.createElement("button");
+        grid.classList.add("grid");
+        boardDOM.appendChild(grid)
+
+    }
+}
+    
 console.log(createBoard());
 
 function playerTurn(num1,num2) {
