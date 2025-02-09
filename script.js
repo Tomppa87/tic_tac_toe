@@ -4,7 +4,18 @@ let turn_head = document.getElementById("turn_header")
 
 let gameBoard;
 
-function createBoard() {   
+function createPlayer (name, token) {
+    return {name, token}
+}
+
+const player1 = createPlayer("Thomas", "X");
+const player1Token = player1.token;
+const player2 = createPlayer("Helena", "O");
+const player2Token = player2.token;
+
+function createBoard() {  
+    turn_head.innerHTML = `Let the games begin. ${player1.name} starts.`
+ 
     const board =  Array.from(Array(3), () => {
         return new Array(3).fill("");
     });
@@ -91,6 +102,10 @@ function checkWinDom() {
         [2, 4, 6]
     ];
     winTest = [];
+    if (flatBoard.includes("") === false) {
+        turn_head.innerHTML = "The winner is: Nobody. You both Suck";
+        console.log("Draw")
+    } else {
     for (let i = 0; i<winningConditions.length;i++) {
         //console.log(winningConditions[i])            
         //console.log(winTest)            
@@ -101,13 +116,18 @@ function checkWinDom() {
         console.log(winTest)
         if (winTest[0] === player1Token && winTest[1] === player1Token && winTest[2] === player1Token) {
             console.log(`Winner is ${player1.name}`)
+            turn_head.innerHTML = `The winner is: ${player1.name}`;
+            
         } else if (winTest[0] === player2Token && winTest[1] === player2Token && winTest[2] === player2Token){
-            console.log(`Winner is ${player2.name}`)
+            console.log(`Winner is ${player2.name}`);
+            turn_head.innerHTML = `The winner is: ${player2.name}`
+            
         }            
         else {
             winTest = [];
         }
-    }       
+    }  
+}     
 }
 /*
 checkWin();
@@ -185,16 +205,8 @@ function playerTurn(num1,num2) {
 }*/
 let count = 0;
 
-function createPlayer (name, token) {
-    return {name, token}
-}
 
-const player1 = createPlayer("Thomas", "X");
-const player1Token = player1.token;
-const player2 = createPlayer("Helena", "O");
-const player2Token = player2.token;
 
-turn_head.innerHTML = `Let the games begin. ${player1.name} starts.`
 
 
 
