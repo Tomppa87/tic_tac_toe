@@ -47,10 +47,11 @@ function playerTurnDom(num) {
     function checkTurnDom() {
         if ((count === 0)||(count % 2 == 0)) {
             player1Turn = true;
-            turn_head.innerHTML = player1Turn
+            turn_head.innerHTML = `Next up is: ${player2.name}`;
 
         } else {
-            player1Turn = false
+            player1Turn = false;
+            turn_head.innerHTML = `Next up is: ${player1.name}`
         };
         return player1Turn;
     }
