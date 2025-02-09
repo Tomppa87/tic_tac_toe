@@ -1,5 +1,16 @@
 let main = document.querySelector(".main")
 let turn_head = document.getElementById("turn_header")
+let submitBtn = document.getElementById("submit_btn");
+let player1Input = document.getElementById("player1");
+let player2Input = document.getElementById("player2");
+
+submitBtn.addEventListener("click", function (e) {
+    e.preventDefault();
+    console.log("Hello")
+    player1 = createPlayer(player1Input.value, "X")
+    player2 = createPlayer(player2Input.value, "O");
+})
+
 // Needs a bit of work
 
 let gameBoard;
@@ -8,13 +19,13 @@ function createPlayer (name, token) {
     return {name, token}
 }
 
-const player1 = createPlayer("Thomas", "X");
+let player1 = {} //= createPlayer("Thomas", "X");
 const player1Token = player1.token;
-const player2 = createPlayer("Helena", "O");
+let player2 = {}//createPlayer("Helena", "O");
 const player2Token = player2.token;
 
 function createBoard() {  
-    turn_head.innerHTML = `Let the games begin. ${player1.name} starts.`
+    //turn_head.innerHTML = `Let the games begin. ${player1.name} starts.`
  
     const board =  Array.from(Array(3), () => {
         return new Array(3).fill("");
@@ -45,6 +56,13 @@ function createBoardDOM() {
     return board;
 }
 createBoardDOM()
+
+function resetBoard() {
+    createBoardDOM()
+    createBoard()
+
+    
+}
     
 console.log(createBoard());
 
@@ -58,11 +76,11 @@ function playerTurnDom(num) {
     function checkTurnDom() {
         if ((count === 0)||(count % 2 == 0)) {
             player1Turn = true;
-            turn_head.innerHTML = `Next up is: ${player2.name}`;
+            
 
         } else {
             player1Turn = false;
-            turn_head.innerHTML = `Next up is: ${player1.name}`
+            
         };
         return player1Turn;
     }
@@ -70,12 +88,14 @@ function playerTurnDom(num) {
         if (valid === true) {
             if (player1Turn) {
                 board[num] = player1Token;
-                document.getElementById(num).innerHTML = player1Token
+                document.getElementById(num).innerHTML = player1Token;
+                turn_head.innerHTML = `Next up is: ${player2.name}`;
                                
                 count +=1;
             }   else {
                 board[num] = player2Token;
                 document.getElementById(num).innerHTML = player2Token
+                turn_head.innerHTML = `Next up is: ${player1.name}`
                 count +=1;
             }
         } else {
@@ -102,10 +122,7 @@ function checkWinDom() {
         [2, 4, 6]
     ];
     winTest = [];
-    if (flatBoard.includes("") === false) {
-        turn_head.innerHTML = "The winner is: Nobody. You both Suck";
-        console.log("Draw")
-    } else {
+    
     for (let i = 0; i<winningConditions.length;i++) {
         //console.log(winningConditions[i])            
         //console.log(winTest)            
@@ -122,13 +139,17 @@ function checkWinDom() {
             console.log(`Winner is ${player2.name}`);
             turn_head.innerHTML = `The winner is: ${player2.name}`
             
-        }            
+        } else if (flatBoard.includes("") === false){
+            turn_head.innerHTML = "The winner is: Nobody. You both Suck";
+            console.log("Draw")
+            
+        }
         else {
             winTest = [];
         }
     }  
 }     
-}
+
 /*
 checkWin();
 console.log(gameBoard);
