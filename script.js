@@ -1,7 +1,6 @@
 let main = document.querySelector(".main")
 let turn_head = document.getElementById("turn_header")
 // Needs a bit of work
-// turn_head.innerHTML = player1Turn
 
 let gameBoard;
 
@@ -48,6 +47,8 @@ function playerTurnDom(num) {
     function checkTurnDom() {
         if ((count === 0)||(count % 2 == 0)) {
             player1Turn = true;
+            turn_head.innerHTML = player1Turn
+
         } else {
             player1Turn = false
         };
@@ -191,5 +192,8 @@ const player1 = createPlayer("Thomas", "X");
 const player1Token = player1.token;
 const player2 = createPlayer("Helena", "O");
 const player2Token = player2.token;
+
+turn_head.innerHTML = `Let the games begin. ${player1.name} starts.`
+
 
 
