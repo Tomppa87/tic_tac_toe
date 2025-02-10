@@ -5,6 +5,7 @@ let submitBtn = document.getElementById("submit_btn");
 let player1Input = document.getElementById("player1");
 let player2Input = document.getElementById("player2");
 let resetBtn = document.createElement("button");
+let playerForm = document.querySelector(".playerForm")
 resetBtn.id = "reset_btn"
 resetBtn.innerHTML = "Reset Game"
 resetBtn.addEventListener("click", () => {
@@ -69,6 +70,10 @@ function resetBoard() {
     }
     count = 0;
     createBoardDOM()
+    turn_head.removeChild(turn_head.lastChild)
+    turn_head.removeChild(turn_head.lastChild)
+    turn_head.appendChild(playerForm)
+    playerForm.reset();
   
 }
     
@@ -138,11 +143,13 @@ function checkWinDom() {
             console.log(`Winner is ${player1.name}`)
             turn_head.innerHTML = `The winner is: ${player1.name}`;
             winCondition = true;
+            turn_head.appendChild(resetBtn)            
             
         } else if (winTest[0] === player2.token && winTest[1] === player2.token && winTest[2] === player2.token){
             console.log(`Winner is ${player2.name}`);
             turn_head.innerHTML = `The winner is: ${player2.name}`;
             winCondition = true;
+            turn_head.appendChild(resetBtn)
         }   else {
             winTest = [];
         }
@@ -150,6 +157,7 @@ function checkWinDom() {
     if ((flatBoard.includes("") === false) && (winCondition === false)){
         turn_head.innerHTML = "The winner is: Nobody. You both Suck";
         console.log("Draw")
+        turn_head.appendChild(resetBtn)
     }  
 }   
 
