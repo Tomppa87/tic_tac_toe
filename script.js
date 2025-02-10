@@ -10,16 +10,13 @@ resetBtn.id = "reset_btn"
 resetBtn.innerHTML = "Reset Game"
 resetBtn.addEventListener("click", () => {
     resetBoard()
-}
-)
+})
 
 submitBtn.addEventListener("click", function (e) {
     e.preventDefault();
     console.log("Hello")
-    player1 = createPlayer(player1Input.value, "X")
-    //player1Token = player1.token;
+    player1 = createPlayer(player1Input.value, "X")    
     player2 = createPlayer(player2Input.value, "O");
-    //player2Token = player2.token;
     turn_head.innerHTML = `Let the games begin. ${player1.name} starts.`
     turn_head.appendChild(resetBtn)
 })
@@ -39,7 +36,7 @@ function createBoard() {
     });
     gameBoard = board
     return board
-    }
+}
 let board = [];
 let boardDOM = document.querySelector(".board")    
 function createBoardDOM() {    
@@ -50,12 +47,14 @@ function createBoardDOM() {
         grid.innerHTML = ""
         board.push("")
         grid.addEventListener("click", (e) => {
-            console.log("hello"+e.target.id);
-            /*e.target.innerHTML = player1Token
-            board[grid.id] = player1Token;*/
-            playerTurnDom(parseInt(e.target.id))
-            checkWinDom();
-            
+            if ((player1.name) && (player2.name)) {
+                playerTurnDom(parseInt(e.target.id))
+                checkWinDom();
+            }
+            else {
+                return
+            }
+                        
         })
         boardDOM.appendChild(grid)
     }
@@ -73,11 +72,8 @@ function resetBoard() {
     turn_head.removeChild(turn_head.lastChild)
     turn_head.removeChild(turn_head.lastChild)
     turn_head.appendChild(playerForm)
-    playerForm.reset();
-  
+    playerForm.reset();  
 }
-    
-console.log(createBoard());
 
 function playerTurnDom(num) {
     let player1Turn;
@@ -91,7 +87,7 @@ function playerTurnDom(num) {
             player1Turn = true;
         } else {
             player1Turn = false;
-        };
+        }
         return player1Turn;
     }
     function playTurnDom() {
@@ -109,16 +105,15 @@ function playerTurnDom(num) {
                 turn_head.appendChild(resetBtn)
                 count +=1;
             }
-        } else {
-            console.log("Error")
+        } else {            
             return;            
         }
     }
     checkValidDom();
     checkTurnDom();
-    playTurnDom();
-    
+    playTurnDom();    
 }
+
 function checkWinDom() {
     const flatBoard = board;
     console.log(flatBoard) 
@@ -162,8 +157,3 @@ function checkWinDom() {
 }   
 
 let count = 0;
-
-
-
-
-
