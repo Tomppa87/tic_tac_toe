@@ -71,6 +71,8 @@ function resetBoard() {
     createBoardDOM()
     turn_head.removeChild(turn_head.lastChild)
     turn_head.removeChild(turn_head.lastChild)
+    player1.name = "" 
+    player2.name = ""
     turn_head.appendChild(playerForm)
     playerForm.reset();  
 }
