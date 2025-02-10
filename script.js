@@ -132,6 +132,7 @@ function checkWinDom() {
         [2, 4, 6]
     ];
     winTest = [];
+    let winCondition = false;
     
     for (let i = 0; i<winningConditions.length;i++) {
         //console.log(winningConditions[i])            
@@ -144,19 +145,23 @@ function checkWinDom() {
         if (winTest[0] === player1.token && winTest[1] === player1.token && winTest[2] === player1.token) {
             console.log(`Winner is ${player1.name}`)
             turn_head.innerHTML = `The winner is: ${player1.name}`;
+            winCondition = true;
+            
         } else if (winTest[0] === player2.token && winTest[1] === player2.token && winTest[2] === player2.token){
             console.log(`Winner is ${player2.name}`);
             turn_head.innerHTML = `The winner is: ${player2.name}`;
+            winCondition = true;
             
-        } else if (flatBoard.includes("") === false){
-            turn_head.innerHTML = "The winner is: Nobody. You both Suck";
-            console.log("Draw");
-        }
-        else {
+        }   else {
             winTest = [];
         }
+        
     }  
-}     
+    if ((flatBoard.includes("") === false) && (winCondition === false)){
+        turn_head.innerHTML = "The winner is: Nobody. You both Suck";
+        console.log("Draw")
+}  
+}   
 
 /*
 checkWin();
@@ -233,7 +238,6 @@ function playerTurn(num1,num2) {
     console.log(gameBoard);
 }*/
 let count = 0;
-
 
 
 
