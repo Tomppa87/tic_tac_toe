@@ -1,4 +1,5 @@
 let main = document.querySelector(".main")
+let head = document.getElementById("header")
 let turn_head = document.getElementById("turn_header")
 let submitBtn = document.getElementById("submit_btn");
 let player1Input = document.getElementById("player1");
@@ -22,29 +23,23 @@ submitBtn.addEventListener("click", function (e) {
     turn_head.appendChild(resetBtn)
 })
 
-// Needs a bit of work
-
 let gameBoard;
 
 function createPlayer (name, token) {
     return {name, token}
 }
 
-let player1 = {} //= createPlayer("Thomas", "X");
-//let player1Token = player1.token;
-let player2 = {}//createPlayer("Helena", "O");
-//let player2Token = player2.token;
+let player1 = {} 
+let player2 = {}
 
-function createBoard() {  
-    //
- 
-    const board =  Array.from(Array(3), () => {
+function createBoard() {
+    let board =  Array.from(Array(3), () => {
         return new Array(3).fill("");
     });
     gameBoard = board
     return board
     }
-const board = [];
+let board = [];
 let boardDOM = document.querySelector(".board")    
 function createBoardDOM() {    
     for (i=0;i<9;i++) {
@@ -68,10 +63,13 @@ function createBoardDOM() {
 createBoardDOM()
 
 function resetBoard() {
+    board = [];    
+    while (boardDOM.lastElementChild) {
+    boardDOM.removeChild(boardDOM.lastElementChild);
+    }
+    count = 0;
     createBoardDOM()
-    createBoard()
-
-    
+  
 }
     
 console.log(createBoard());
@@ -86,11 +84,8 @@ function playerTurnDom(num) {
     function checkTurnDom() {
         if ((count === 0)||(count % 2 == 0)) {
             player1Turn = true;
-            
-
         } else {
             player1Turn = false;
-            
         };
         return player1Turn;
     }
@@ -100,12 +95,13 @@ function playerTurnDom(num) {
                 board[num] = player1.token;
                 document.getElementById(num).innerHTML = player1.token;
                 turn_head.innerHTML = `Next up is: ${player2.name}`;
-                               
+                turn_head.appendChild(resetBtn)
                 count +=1;
             }   else {
                 board[num] = player2.token;
                 document.getElementById(num).innerHTML = player2.token
                 turn_head.innerHTML = `Next up is: ${player1.name}`
+                turn_head.appendChild(resetBtn)
                 count +=1;
             }
         } else {
@@ -134,14 +130,10 @@ function checkWinDom() {
     winTest = [];
     let winCondition = false;
     
-    for (let i = 0; i<winningConditions.length;i++) {
-        //console.log(winningConditions[i])            
-        //console.log(winTest)            
+    for (let i = 0; i<winningConditions.length;i++) {         
         for (let j = 0; j<3;j++) {
-            //console.log(winningConditions[i][j])
             winTest.push(flatBoard[winningConditions[i][j]]);
         }
-        console.log(winTest)
         if (winTest[0] === player1.token && winTest[1] === player1.token && winTest[2] === player1.token) {
             console.log(`Winner is ${player1.name}`)
             turn_head.innerHTML = `The winner is: ${player1.name}`;
@@ -151,92 +143,16 @@ function checkWinDom() {
             console.log(`Winner is ${player2.name}`);
             turn_head.innerHTML = `The winner is: ${player2.name}`;
             winCondition = true;
-            
         }   else {
             winTest = [];
         }
-        
     }  
     if ((flatBoard.includes("") === false) && (winCondition === false)){
         turn_head.innerHTML = "The winner is: Nobody. You both Suck";
         console.log("Draw")
-}  
+    }  
 }   
 
-/*
-checkWin();
-console.log(gameBoard);
-
-function playerTurn(num1,num2) {
-    let player1Turn;
-    let valid;
-    function checkValid(num1,num2) {
-        valid = (gameBoard[num1][num2] === "");
-        
-        return valid;
-    }
-
-    function checkTurn() {
-        if ((count === 0)||(count % 2 == 0)) {
-            player1Turn = true;
-        } else {
-            player1Turn = false
-        };
-        return player1Turn;
-    }
-    function playTurn() {
-        if (valid === true) {
-            if (player1Turn) {
-                gameBoard[num1][num2] = player1Token;
-                count +=1;
-            }   else {
-                gameBoard[num1][num2] = player2Token;
-                count +=1;
-            }
-        } else {
-            console.log("Error")
-            return;            
-        }
-    }
-    checkValid(num1,num2);
-    checkTurn();
-    playTurn();
-
-    function checkWin() {
-        const flatBoard = gameBoard.flat();
-        console.log(flatBoard) 
-        const winningConditions = [
-            [0, 1, 2],
-            [3, 4, 5],
-            [6, 7, 8],
-            [0, 3, 6],
-            [1, 4, 7],
-            [2, 5, 8],
-            [0, 4, 8],
-            [2, 4, 6]
-        ];
-        winTest = [];
-        for (let i = 0; i<winningConditions.length;i++) {
-            //console.log(winningConditions[i])            
-            //console.log(winTest)            
-            for (let j = 0; j<3;j++) {
-                //console.log(winningConditions[i][j])
-                winTest.push(flatBoard[winningConditions[i][j]]);
-            }
-            console.log(winTest)
-            if (winTest[0] === player1Token && winTest[1] === player1Token && winTest[2] === player1Token) {
-                console.log(`Winner is ${player1.name}`)
-            } else if (winTest[0] === player2Token && winTest[1] === player2Token && winTest[2] === player2Token){
-                console.log(`Winner is ${player2.name}`)
-            }            
-            else {
-                winTest = [];
-            }
-        }       
-    }
-    checkWin();
-    console.log(gameBoard);
-}*/
 let count = 0;
 
 

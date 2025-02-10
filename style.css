@@ -23,15 +23,30 @@
 
 #turn_header {
     display: flex;
+    flex-direction: column;
     height: 150px;
     align-items: center;
     justify-content: center;
-    font-size: xx-large;
+    font-size: 1,5em;
+    gap: 20px
+}
+
+.playerForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.playerForm > * {
+    padding-bottom: 20px;
 }
 
 #submit_btn,
 #reset_btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     padding: 10px;
     width: 150px;
-    margin-left: 200px;
+    
 }
