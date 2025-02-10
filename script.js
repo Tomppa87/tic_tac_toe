@@ -3,6 +3,13 @@ let turn_head = document.getElementById("turn_header")
 let submitBtn = document.getElementById("submit_btn");
 let player1Input = document.getElementById("player1");
 let player2Input = document.getElementById("player2");
+let resetBtn = document.createElement("button");
+resetBtn.id = "reset_btn"
+resetBtn.innerHTML = "Reset Game"
+resetBtn.addEventListener("click", () => {
+    resetBoard()
+}
+)
 
 submitBtn.addEventListener("click", function (e) {
     e.preventDefault();
@@ -12,6 +19,7 @@ submitBtn.addEventListener("click", function (e) {
     player2 = createPlayer(player2Input.value, "O");
     //player2Token = player2.token;
     turn_head.innerHTML = `Let the games begin. ${player1.name} starts.`
+    turn_head.appendChild(resetBtn)
 })
 
 // Needs a bit of work
@@ -38,8 +46,7 @@ function createBoard() {
     }
 const board = [];
 let boardDOM = document.querySelector(".board")    
-function createBoardDOM() {
-    
+function createBoardDOM() {    
     for (i=0;i<9;i++) {
         const grid = document.createElement("button");
         grid.id = i;        
@@ -137,15 +144,13 @@ function checkWinDom() {
         if (winTest[0] === player1.token && winTest[1] === player1.token && winTest[2] === player1.token) {
             console.log(`Winner is ${player1.name}`)
             turn_head.innerHTML = `The winner is: ${player1.name}`;
-            
         } else if (winTest[0] === player2.token && winTest[1] === player2.token && winTest[2] === player2.token){
             console.log(`Winner is ${player2.name}`);
-            turn_head.innerHTML = `The winner is: ${player2.name}`
+            turn_head.innerHTML = `The winner is: ${player2.name}`;
             
         } else if (flatBoard.includes("") === false){
             turn_head.innerHTML = "The winner is: Nobody. You both Suck";
-            console.log("Draw")
-            
+            console.log("Draw");
         }
         else {
             winTest = [];
