@@ -8,7 +8,10 @@ submitBtn.addEventListener("click", function (e) {
     e.preventDefault();
     console.log("Hello")
     player1 = createPlayer(player1Input.value, "X")
+    //player1Token = player1.token;
     player2 = createPlayer(player2Input.value, "O");
+    //player2Token = player2.token;
+    turn_head.innerHTML = `Let the games begin. ${player1.name} starts.`
 })
 
 // Needs a bit of work
@@ -20,12 +23,12 @@ function createPlayer (name, token) {
 }
 
 let player1 = {} //= createPlayer("Thomas", "X");
-const player1Token = player1.token;
+//let player1Token = player1.token;
 let player2 = {}//createPlayer("Helena", "O");
-const player2Token = player2.token;
+//let player2Token = player2.token;
 
 function createBoard() {  
-    //turn_head.innerHTML = `Let the games begin. ${player1.name} starts.`
+    //
  
     const board =  Array.from(Array(3), () => {
         return new Array(3).fill("");
@@ -87,14 +90,14 @@ function playerTurnDom(num) {
     function playTurnDom() {
         if (valid === true) {
             if (player1Turn) {
-                board[num] = player1Token;
-                document.getElementById(num).innerHTML = player1Token;
+                board[num] = player1.token;
+                document.getElementById(num).innerHTML = player1.token;
                 turn_head.innerHTML = `Next up is: ${player2.name}`;
                                
                 count +=1;
             }   else {
-                board[num] = player2Token;
-                document.getElementById(num).innerHTML = player2Token
+                board[num] = player2.token;
+                document.getElementById(num).innerHTML = player2.token
                 turn_head.innerHTML = `Next up is: ${player1.name}`
                 count +=1;
             }
@@ -131,11 +134,11 @@ function checkWinDom() {
             winTest.push(flatBoard[winningConditions[i][j]]);
         }
         console.log(winTest)
-        if (winTest[0] === player1Token && winTest[1] === player1Token && winTest[2] === player1Token) {
+        if (winTest[0] === player1.token && winTest[1] === player1.token && winTest[2] === player1.token) {
             console.log(`Winner is ${player1.name}`)
             turn_head.innerHTML = `The winner is: ${player1.name}`;
             
-        } else if (winTest[0] === player2Token && winTest[1] === player2Token && winTest[2] === player2Token){
+        } else if (winTest[0] === player2.token && winTest[1] === player2.token && winTest[2] === player2.token){
             console.log(`Winner is ${player2.name}`);
             turn_head.innerHTML = `The winner is: ${player2.name}`
             
